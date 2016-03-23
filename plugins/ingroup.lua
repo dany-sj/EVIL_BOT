@@ -1123,7 +1123,7 @@ if msg.to.type == 'chat' then
         return nil
       end
     end
-    if matches[1] == 'setname' and is_momod(msg) then
+    if matches[1] == 'stnam' and is_momod(msg) then
       local new_name = string.gsub(matches[2], '_', ' ')
       data[tostring(msg.to.id)]['settings']['set_name'] = new_name
       save_data(_config.moderation.data, data)
@@ -1133,12 +1133,12 @@ if msg.to.type == 'chat' then
 
       savelog(msg.to.id, "Group { "..msg.to.print_name.." }  name changed to [ "..new_name.." ] by "..name_log.." ["..msg.from.id.."]")
     end
-    if matches[1] == 'setphoto' and is_momod(msg) then
+    if matches[1] == 'stphoto' and is_momod(msg) then
       data[tostring(msg.to.id)]['settings']['set_photo'] = 'waiting'
       save_data(_config.moderation.data, data)
       return 'Please send me new group photo now'
     end
-    if matches[1] == 'promote' and not matches[2] then
+    if matches[1] == 'stmod' and not matches[2] then
 	   if not is_momod(msg) then
         return
       end
@@ -1149,7 +1149,7 @@ if msg.to.type == 'chat' then
           msgr = get_message(msg.reply_id, promote_by_reply, false)
       end
     end
-    if matches[1] == 'promote' and matches[2] then
+    if matches[1] == 'stmod' and matches[2] then
       if not is_momod(msg) then
         return
       end
@@ -1160,14 +1160,14 @@ if msg.to.type == 'chat' then
 	savelog(msg.to.id, name_log.." ["..msg.from.id.."] promoted @".. member)
 	local cbres_extra = {
 		chat_id = msg.to.id,
-        mod_cmd = 'promote',
+        mod_cmd = 'stmod',
 		from_id = msg.from.id
 	}
 	local username = matches[2]
 	local username = string.gsub(matches[2], '@', '')
 	return resolve_username(username, promote_demote_res, cbres_extra)
     end
-    if matches[1] == 'demote' and not matches[2] then
+    if matches[1] == 'rmmod' and not matches[2] then
 	  if not is_momod(msg) then
         return
       end
@@ -1178,7 +1178,7 @@ if msg.to.type == 'chat' then
           msgr = get_message(msg.reply_id, demote_by_reply, false)
       end
     end
-    if matches[1] == 'demote' and matches[2] then
+    if matches[1] == 'rmmod' and matches[2] then
       if not is_momod(msg) then
         return
       end
@@ -1199,7 +1199,7 @@ if msg.to.type == 'chat' then
 	local username = string.gsub(matches[2], '@', '')
 	return resolve_username(username, promote_demote_res, cbres_extra)
     end
-    if matches[1] == 'modlist' then
+    if matches[1] == 'mods' then
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group modlist")
       return modlist(msg)
     end
@@ -1211,7 +1211,7 @@ if msg.to.type == 'chat' then
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group rules")
       return get_rules(msg, data)
     end
-    if matches[1] == 'set' then
+    if matches[1] == 'st' then
       if matches[2] == 'rules' then
         rules = matches[3]
         local target = msg.to.id
@@ -1238,7 +1238,7 @@ end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
 			return lock_group_membermod(msg, data, target)
 		end
-		if matches[2] == 'flood' then
+		if matches[2] == 'flod' then
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked flood ")
 			return lock_group_floodmod(msg, data, target)
 		end
@@ -1285,7 +1285,7 @@ end
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked photo ")
 			return unlock_group_photomod(msg, data, target)
 		end
-		if matches[2] == 'flood' then
+		if matches[2] == 'flod' then
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked flood ")
 			return unlock_group_floodmod(msg, data, target)
 		end
@@ -1512,7 +1512,7 @@ end
 		return muted_user_list(chat_id)
 	end
 
-    if matches[1] == 'settings' and is_momod(msg) then
+    if matches[1] == 'sting' and is_momod(msg) then
       local target = msg.to.id
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group settings ")
       return show_group_settingsmod(msg, target)
@@ -1559,7 +1559,7 @@ if msg.to.type == 'chat' then
        savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
       return "Group link:\n"..group_link
     end
-    if matches[1] == 'setowner' and matches[2] then
+    if matches[1] == 'stoner' and matches[2] then
       if not is_owner(msg) then
         return "For owner only!"
       end
@@ -1569,7 +1569,7 @@ if msg.to.type == 'chat' then
       local text = matches[2].." added as owner"
       return text
     end
-    if matches[1] == 'setowner' and not matches[2] then
+    if matches[1] == 'stoner' and not matches[2] then
       if not is_owner(msg) then
         return "only for the owner!"
       end
@@ -1578,7 +1578,7 @@ if msg.to.type == 'chat' then
       end
     end
 end
-    if matches[1] == 'owner' then
+    if matches[1] == 'oner' then
       local group_owner = data[tostring(msg.to.id)]['set_owner']
       if not group_owner then
         return "no owner,ask admins in support groups to set owner for your group"
@@ -1586,7 +1586,7 @@ end
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] used /owner")
       return "Group owner is ["..group_owner..']'
     end
-    if matches[1] == 'setgpowner' then
+    if matches[1] == 'stgponer' then
       local receiver = "chat#id"..matches[2]
       if not is_admin1(msg) then
         return "For admins only!"
@@ -1597,7 +1597,7 @@ end
       send_large_msg(receiver, text)
       return
     end
-    if matches[1] == 'setflood' then
+    if matches[1] == 'stflod' then
       if not is_momod(msg) then
         return "For moderators only!"
       end
@@ -1624,7 +1624,7 @@ if msg.to.type == 'chat' then
         chat_info(receiver, cleanmember, {receiver=receiver})
       end
 	 end
-      if matches[2] == 'modlist' then
+      if matches[2] == 'mods' then
         if next(data[tostring(msg.to.id)]['moderators']) == nil then --fix way
           return 'No moderator in this group.'
         end
@@ -1675,7 +1675,7 @@ if msg.to.type == 'chat' then
         return 'This is a group'
      end
    end
-    if matches[1] == 'help' then
+    if matches[1] == 'hlp' then
       if not is_momod(msg) or is_realm(msg) then
         return
       end
@@ -1717,42 +1717,42 @@ end
 
 return {
   patterns = {
-  "^[#!/](add)$",
-  "^[#!/](add) (realm)$",
-  "^[#!/](rem)$",
-  "^[#!/](rem) (realm)$",
-  "^[#!/](rules)$",
-  "^[#!/](about)$",
-  "^[#!/](setname) (.*)$",
-  "^[#!/](setphoto)$",
-  "^[#!/](promote) (.*)$",
-  "^[#!/](promote)",
-  "^[#!/](help)$",
-  "^[#!/](clean) (.*)$",
-  "^[#!/](kill) (chat)$",
-  "^[#!/](kill) (realm)$",
-  "^[#!/](demote) (.*)$",
-  "^[#!/](demote)",
-  "^[#!/](set) ([^%s]+) (.*)$",
-  "^[#!/](lock) (.*)$",
-  "^[#!/](setowner) (%d+)$",
-  "^[#!/](setowner)",
-  "^[#!/](owner)$",
-  "^[#!/](res) (.*)$",
-  "^[#!/](setgpowner) (%d+) (%d+)$",-- (group id) (owner id)
-  "^[#!/](unlock) (.*)$",
-  "^[#!/](setflood) (%d+)$",
-  "^[#!/](settings)$",
+  "^([Aa]dd)$",
+  "^([Aa]dd) (realm)$",
+  "^(Rr]em)$",
+  "^(Rr]em) (realm)$",
+  "^([Rr]ules)$",
+  "^([Aa]bout)$",
+  "^([Ss]tnam) (.*)$",
+  "^([Ss]tphoto)$",
+  "^([Ss]tmod) (.*)$",
+  "^([Ss]tmod)",
+  "^([Hh]lp)$",
+  "^([Cc]lean) (.*)$",
+  "^([Kk]ill) (chat)$",
+  "^([Kk]ill) (realm)$",
+  "^([Rr]mmod) (.*)$",
+  "^([Rr]mmod)",
+  "^([Ss]t) ([^%s]+) (.*)$",
+  "^([Ll]ock) (.*)$",
+  "^([Ss]toner) (%d+)$",
+  "^([Ss]toner)",
+  "^([Oo]ner)$",
+  "^([Rr]es) (.*)$",
+  "^([Ss]tgponer) (%d+) (%d+)$",-- (group id) (owner id)
+  "^([Uu]nlock) (.*)$",
+  "^([Ss]tflod) (%d+)$",
+  "^([Ss]ting)$",
   "^[#!/](public) (.*)$",
-  "^[#!/](modlist)$",
-  "^[#!/](newlink)$",
-  "^[#!/](link)$",
-  "^[#!/]([Mm]ute) ([^%s]+)$",
-  "^[#!/]([Uu]nmute) ([^%s]+)$",
-  "^[#!/]([Mm]uteuser)$",
-  "^[#!/]([Mm]uteuser) (.*)$",
-  "^[#!/]([Mm]uteslist)$",
-  "^[#!/]([Mm]utelist)$",
+  "^([Mm]ods)$",
+  "^([Nn]wlink)$",
+  "^([Ll]ink)$",
+  "^([Mm]ute) ([^%s]+)$",
+  "^([Uu]nmute) ([^%s]+)$",
+  "^([Mm]uteuser)$",
+  "^([Mm]uteuser) (.*)$",
+  "^([Mm]uteslist)$",
+  "^([Mm]utelist)$",
   "^[#!/](kickinactive)$",
   "^[#!/](kickinactive) (%d+)$",
   "%[(document)%]",
