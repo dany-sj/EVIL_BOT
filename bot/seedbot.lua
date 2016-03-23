@@ -240,7 +240,10 @@ function create_config( )
     "plugins",
     "download_media",
     "invite",
+    "text",
+    "hello",
     "all",
+    "webshot",
     "leave_ban",
     "admin"
     },
