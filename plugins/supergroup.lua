@@ -2015,7 +2015,7 @@ return {
 	"^([Pp]ublic) (.*)$",
 	"^([Ss]ting)$",
 	"^([Rr]ules)$",
-	"^([Ss]etflod) (%d+)$",
+	"^([Ss]tflod) (%d+)$",
 	"^([Cc]lean) (.*)$",
 	"^([Hh]lp)$",
 	"^([Mm]uteslist)$",
