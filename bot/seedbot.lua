@@ -345,261 +345,220 @@ This command will send text to [group_id]
     help_text = [[
 Commands list :
 
-!kick [username|id]
-You can also do it by reply
+😈kk [username|id]
+[آیدی،کد،ریپلای]
+___________________________________________________________________
+😈bn [ username|id]
+[آیدی،کد،ریپلای]
+___________________________________________________________________
+😈unbn [id]
+[کد،ایدی،ریپلای]
+___________________________________________________________________
+😈who
+دریافت لیست افراد گروه
 
-!ban [ username|id]
-You can also do it by reply
+😈mods
+دریافت لیست مدیران گروه
+___________________________________________________________________
+😈stmod [username]
+تنظیم مدیر
+___________________________________________________________________
+😈rmmod [username]
+حذف مدیر
 
-!unban [id]
-You can also do it by reply
+😈kickme
+حذف کردن خود از گروه
+___________________________________________________________________
+😈about
+توظیحات گروه
+___________________________________________________________________
+😈stphoto
+تنظیم عکس گروه
+___________________________________________________________________
+😈stnam [name]
+تنظیم نام گروه
+___________________________________________________________________
+😈rules
+قوانین گروه
+___________________________________________________________________
+😈id
+دریافت ای دی تلگرامی خود
+___________________________________________________________________
+😈hlp
+راهنمای دستورات بات
+___________________________________________________________________
+😈lock [member|name|bots|leave] 
+قفل  [افراد گروه|نام|بات|خروج] 
 
-!who
-Members list
+😈unlock [member|name|bots|leave]
+ازاد کردن قفل  [افراد گروه|نام|بات|خروج] 
+___________________________________________________________________
+😈st rules [text]
+گذاشتن قوانین در گروه خود
+___________________________________________________________________
+😈st about [text]
+گذاشتن توضیحات گروه خود
+___________________________________________________________________
+😈sting
+تنظیمات گروه
+___________________________________________________________________
+😈nwlink
+لینک جدید
+___________________________________________________________________
+😈link
+لینک
+___________________________________________________________________
+😈oner
+دریافت ایدی صاحب گروه
+___________________________________________________________________
+😈stoner [id]
+افزودن مدیر به گروه
+___________________________________________________________________
+😈stflod [value]
+تنظیم حساسیت اسپم
 
-!modlist
-Moderators list
+___________________________________________________________________
+😈bnlis
+لیست بن شده ها
+___________________________________________________________________
+همه دستورات بدون /.! کار میکند
 
-!promote [username]
-Promote someone
+» فقط مدها، مالک و مدیر می تواند رباتها در گروه اضافه کنید
 
-!demote [username]
-Demote someone
+» فقط ناظران و مالک می تواند ضربه، ممنوعیت، رفع ممنوعیت، لینک جدید, لینک، مجموعه عکس، مجموعه نام، قفل، باز کردن، قوانین مجموعه، مجموعه ای در مورد و دستورات تنظیمات استفاده کنید
 
-!kickme
-Will kick user
-
-!about
-Group description
-
-!setphoto
-Set and locks group photo
-
-!setname [name]
-Set group name
-
-!rules
-Group rules
-
-!id
-return group id or user id
-
-!help
-Returns help text
-
-!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
-Lock group settings
-*rtl: Kick user if Right To Left Char. is in name*
-
-!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
-Unlock group settings
-*rtl: Kick user if Right To Left Char. is in name*
-
-!mute [all|audio|gifs|photo|video]
-mute group message types
-*If "muted" message type: user is kicked if message type is posted 
-
-!unmute [all|audio|gifs|photo|video]
-Unmute group message types
-*If "unmuted" message type: user is not kicked if message type is posted 
-
-!set rules <text>
-Set <text> as rules
-
-!set about <text>
-Set <text> as about
-
-!settings
-Returns group settings
-
-!muteslist
-Returns mutes for chat
-
-!muteuser [username]
-Mute a user in chat
-*user is kicked if they talk
-*only owners can mute | mods and owners can unmute
-
-!mutelist
-Returns list of muted users in chat
-
-!newlink
-create/revoke your group link
-
-!link
-returns group link
-
-!owner
-returns group owner id
-
-!setowner [id]
-Will set id as owner
-
-!setflood [value]
-Set [value] as flood sensitivity
-
-!stats
-Simple message statistics
-
-!save [value] <text>
-Save <text> as [value]
-
-!get [value]
-Returns text of [value]
-
-!clean [modlist|rules|about]
-Will clear [modlist|rules|about] and set it to nil
-
-!res [username]
-returns user id
-"!res @username"
-
-!log
-Returns group logs
-
-!banlist
-will return group ban list
-
-**You can use "#", "!", or "/" to begin all commands
-
-
-*Only owner and mods can add bots in group
-
-
-*Only moderators and owner can use kick,ban,unban,newlink,link,setphoto,setname,lock,unlock,set rules,set about and settings commands
-
-*Only owner can use res,setowner,promote,demote and log commands
+» تنها مالک می تواند شیء، تنظیم اونر استفاده، ترویج، تنزل رتبه و ورود دستورات
 
 ]],
 	help_text_super =[[
 SuperGroup Commands:
 
-!info
+😈info
 Displays general info about the SuperGroup
 
-!admins
+😈admins
 Returns SuperGroup admins list
 
-!owner
+😈wner
 Returns group owner
 
-!modlist
+😈mods
 Returns Moderators list
 
-!bots
+😈bots
 Lists bots in SuperGroup
 
-!who
+😈who
 Lists all users in SuperGroup
 
-!block
+�kk
 Kicks a user from SuperGroup
 *Adds user to blocked list*
 
-!ban
+😈bn
 Bans user from the SuperGroup
 
-!unban
+😈unbn
 Unbans user from the SuperGroup
 
-!id
+😈id
 Return SuperGroup ID or user id
 *For userID's: !id @username or reply !id*
 
-!id from
+😈id from
 Get ID of user message is forwarded from
 
-!kickme
+😈kickme
 Kicks user from SuperGroup
 *Must be unblocked by owner or use join by pm to return*
 
-!setowner
+😈stoner
 Sets the SuperGroup owner
 
-!promote [username|id]
+😈stmod [username|id]
 Promote a SuperGroup moderator
 
-!demote [username|id]
+😈rmmod [username|id]
 Demote a SuperGroup moderator
 
-!setname
+😈stnam
 Sets the chat name
 
-!setphoto
+😈stphoto
 Sets the chat photo
 
-!setrules
+�strules
 Sets the chat rules
 
-!setabout
+😈stabout
 Sets the about section in chat info(members list)
 
-!save [value] <text>
+😈save [value] <text>
 Sets extra info for chat
 
-!get [value]
+😈get [value]
 Retrieves extra info for chat by value
 
-!newlink
+😈nwlink
 Generates a new group link
 
-!link
+😈link
 Retireives the group link
 
-!rules
+😈rules
 Retrieves the chat rules
 
-!lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+😈lock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
 Lock group settings
 *rtl: Delete msg if Right To Left Char. is in name*
 *strict: enable strict settings enforcement (violating user will be kicked)*
 
-!unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
+😈unlock [links|flood|spam|Arabic|member|rtl|sticker|contacts|strict]
 Unlock group settings
 *rtl: Delete msg if Right To Left Char. is in name*
 *strict: disable strict settings enforcement (violating user will not be kicked)*
 
-!mute [all|audio|gifs|photo|video|service]
+😈mute [all|audio|gifs|photo|video|service]
 mute group message types
 *A "muted" message type is auto-deleted if posted
 
-!unmute [all|audio|gifs|photo|video|service]
+😈unmute [all|audio|gifs|photo|video|service]
 Unmute group message types
 *A "unmuted" message type is not auto-deleted if posted
 
-!setflood [value]
+😈stflod [value]
 Set [value] as flood sensitivity
 
-!settings
+😈sting
 Returns chat settings
 
-!muteslist
+😈muteslist
 Returns mutes for chat
 
-!muteuser [username]
+😈muteuser [username]
 Mute a user in chat
 *If a muted user posts a message, the message is deleted automaically
 *only owners can mute | mods and owners can unmute
 
-!mutelist
+😈mutelist
 Returns list of muted users in chat
 
-!banlist
+😈bnlis
 Returns SuperGroup ban list
 
-!clean [rules|about|modlist|mutelist]
+😈clean [rules|about|modlist|mutelist]
 
-!del
+😈del
 Deletes a message by reply
 
-!public [yes|no]
+😈public [yes|no]
 Set chat visibility in pm !chats or !chatlist commands
 
-!res [username]
+😈res [username]
 Returns users name and id by username
 
 
-!log
+😈log
 Returns group logs
 *Search for kick reasons using [#RTL|#spam|#lockmember]
 
