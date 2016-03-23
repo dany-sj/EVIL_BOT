@@ -228,6 +228,7 @@ function create_config( )
     "owners",
     "arabic_lock",
     "set",
+    "anti_bot",
     "get",
     "broadcast",
     "invite",
