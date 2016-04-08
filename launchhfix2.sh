@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
 THIS_DIR=$(cd $(dirname $0); pwd)
 cd $THIS_DIR
@@ -33,16 +33,15 @@ install_luarocks() {
 }
 
 install_rocks() {
-  ./.luarocks/bin/luarocks install luasec
+  ./.luarocks/bin/luarocks install luasocket
   RET=$?; if [ $RET -ne 0 ];
     then echo "Error. Exiting."; exit $RET;
   fi
 
-  ./.luarocks/bin/luarocks install lbase64 20120807-3
+  ./.luarocks/bin/luarocks install oauth
   RET=$?; if [ $RET -ne 0 ];
     then echo "Error. Exiting."; exit $RET;
   fi
-
 
   ./.luarocks/bin/luarocks install redis-lua
   RET=$?; if [ $RET -ne 0 ];
@@ -111,7 +110,9 @@ else
     echo "Run $0 install"
     exit 1
   fi
-  
-
-  ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/TMP_bot.lua -l 1 -E $@
+  while true; do
+   rm -r ../.telegram-cli/state
+   ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/TMP_bot.lua -l 1 -E $@
+   sleep 3
+  done
 fi
