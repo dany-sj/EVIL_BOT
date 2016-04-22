@@ -45,7 +45,8 @@ install_rocks() {
   
  ./.luarocks/bin/luarocks install luasocket
   RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
+    then echo "Erfi
+r. Exiting."; exit $RET;
   fi
 
   ./.luarocks/bin/luarocks install oauth
@@ -123,4 +124,3 @@ else
   rm -r ../.telegram-cli/state #Prevent tg from crash
   ./tg/bin/telegram-cli -k ./tg/tg-server.pub -s ./bot/seedbot.lua -l 1 -E $@
 fi
-
