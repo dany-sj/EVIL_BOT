@@ -1120,7 +1120,7 @@ local function run(msg, matches)
 			admins = channel_get_admins(receiver,callback, {receiver = receiver, msg = msg, member_type = member_type})
 		end
 
-		if matches[1] == "owner" then
+		if matches[1] == "oner" then
 			local group_owner = data[tostring(msg.to.id)]['set_owner']
 			if not group_owner then
 				return "no owner,ask admins in support groups to set owner for your SuperGroup"
@@ -1129,7 +1129,7 @@ local function run(msg, matches)
 			return "SuperGroup owner is ["..group_owner..']'
 		end
 
-		if matches[1] == "modlist" then
+		if matches[1] == "mods" then
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group modlist")
 			return modlist(msg)
 			-- channel_get_admins(receiver,callback, {receiver = receiver})
@@ -1163,14 +1163,14 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'block' and is_momod(msg) then
+		if matches[1] == 'kk' and is_momod(msg) then
 			if type(msg.reply_id) ~= "nil" then
 				local cbreply_extra = {
 					get_cmd = 'channel_block',
 					msg = msg
 				}
 				get_message(msg.reply_id, get_message_callback, cbreply_extra)
-			elseif matches[1] == 'block' and string.match(matches[2], '^%d+$') then
+			elseif matches[1] == 'kk' and string.match(matches[2], '^%d+$') then
 				--[[local user_id = matches[2]
 				local channel_id = msg.to.id
 				if is_momod2(user_id, channel_id) and not is_admin2(user_id) then
@@ -1235,7 +1235,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'newlink' and is_momod(msg)then
+		if matches[1] == 'nwlink' and is_momod(msg)then
 			local function callback_link (extra , success, result)
 			local receiver = get_receiver(msg)
 				if success == 0 then
@@ -1252,7 +1252,7 @@ local function run(msg, matches)
 			export_channel_link(receiver, callback_link, false)
 		end
 
-		if matches[1] == 'setlink' and is_owner(msg) then
+		if matches[1] == 'stlink' and is_owner(msg) then
 			data[tostring(msg.to.id)]['settings']['set_link'] = 'waiting'
 			save_data(_config.moderation.data, data)
 			return 'Please send the new group link now'
@@ -1306,7 +1306,7 @@ local function run(msg, matches)
 			chaannel_kick(receiver, user, ok_cb, false)
 		end]]
 
-			if matches[1] == 'setadmin' then
+			if matches[1] == 'stadmin' then
 				if not is_support(msg.from.id) and not is_owner(msg) then
 					return
 				end
@@ -1342,7 +1342,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'demoteadmin' then
+		if matches[1] == 'dmoteadmin' then
 			if not is_support(msg.from.id) and not is_owner(msg) then
 				return
 			end
@@ -1369,7 +1369,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'setowner' and is_owner(msg) then
+		if matches[1] == 'stoner' and is_owner(msg) then
 			if type(msg.reply_id) ~= "nil" then
 				local cbreply_extra = {
 					get_cmd = 'setowner',
@@ -1405,7 +1405,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'promote' then
+		if matches[1] == 'stmod' then
 		  if not is_momod(msg) then
 				return
 			end
@@ -1449,7 +1449,7 @@ local function run(msg, matches)
 			return "ok"
 		end
 
-		if matches[1] == 'demote' then
+		if matches[1] == 'delmod' then
 			if not is_momod(msg) then
 				return
 			end
@@ -1480,7 +1480,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == "setname" and is_momod(msg) then
+		if matches[1] == "stnam" and is_momod(msg) then
 			local receiver = get_receiver(msg)
 			local set_name = string.gsub(matches[2], '_', '')
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] renamed SuperGroup to: "..matches[2])
@@ -1493,7 +1493,7 @@ local function run(msg, matches)
 			save_data(_config.moderation.data, data)
 		end
 
-		if matches[1] == "setabout" and is_momod(msg) then
+		if matches[1] == "stabout" and is_momod(msg) then
 			local receiver = get_receiver(msg)
 			local about_text = matches[2]
 			local data_cat = 'description'
@@ -1505,7 +1505,7 @@ local function run(msg, matches)
 			return "Description has been set.\n\nSelect the chat again to see the changes."
 		end
 
-		if matches[1] == "setusername" and is_admin1(msg) then
+		if matches[1] == "stusername" and is_admin1(msg) then
 			local function ok_username_cb (extra, success, result)
 				local receiver = extra.receiver
 				if success == 1 then
@@ -1518,7 +1518,7 @@ local function run(msg, matches)
 			channel_set_username(receiver, username, ok_username_cb, {receiver=receiver})
 		end
 
-		if matches[1] == 'setrules' and is_momod(msg) then
+		if matches[1] == 'strules' and is_momod(msg) then
 			rules = matches[2]
 			local target = msg.to.id
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group rules to ["..matches[2].."]")
@@ -1532,7 +1532,7 @@ local function run(msg, matches)
 				return
 			end
 		end
-		if matches[1] == 'setphoto' and is_momod(msg) then
+		if matches[1] == 'stphoto' and is_momod(msg) then
 			data[tostring(msg.to.id)]['settings']['set_photo'] = 'waiting'
 			save_data(_config.moderation.data, data)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] started setting new SuperGroup photo")
@@ -1546,7 +1546,7 @@ local function run(msg, matches)
 			if not is_momod(msg) then
 				return "Only owner can clean"
 			end
-			if matches[2] == 'modlist' then
+			if matches[2] == 'mods' then
 				if next(data[tostring(msg.to.id)]['moderators']) == nil then
 					return 'No moderator(s) in this SuperGroup.'
 				end
@@ -1680,7 +1680,7 @@ local function run(msg, matches)
 			end
 		end
 
-		if matches[1] == 'setflood' then
+		if matches[1] == 'stflod' then
 			if not is_momod(msg) then
 				return
 			end
@@ -1896,7 +1896,7 @@ local function run(msg, matches)
 			return muted_user_list(chat_id)
 		end
 
-		if matches[1] == 'settings' and is_momod(msg) then
+		if matches[1] == 'sting' and is_momod(msg) then
 			local target = msg.to.id
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup settings ")
 			return show_supergroup_settingsmod(msg, target)
@@ -1907,10 +1907,10 @@ local function run(msg, matches)
 			return get_rules(msg, data)
 		end
 
-		if matches[1] == 'help' and not is_owner(msg) then
-			text = "Message /superhelp to @Teleseed in private for SuperGroup help"
+		if matches[1] == 'hlp' and not is_owner(msg) then
+			text = "Message /superhelp to @kingsapp in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
-		elseif matches[1] == 'help' and is_owner(msg) then
+		elseif matches[1] == 'hlp' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] Used /superhelp")
 			return super_help()
@@ -1980,37 +1980,37 @@ return {
 	"^([Mm]ove) (.*)$",
 	"^([Ii]nfo)$",
 	"^([Aa]dmins)$",
-	"^([Oo]wner)$",
-	"^([Mm]odlist)$",
+	"^([Oo]wnr)$",
+	"^([Mm]ods)$",
 	"^([Bb]ots)$",
 	"^([Ww]ho)$",
 	"^([Kk]icked)$",
-    "^([Bb]lock) (.*)",
-	"^([Bb]lock)",
+    "^([Kk]k) (.*)",
+	"^([Kk]k)",
 	"^([Tt]osuper)$",
 	"^([Ii][Dd])$",
 	"^([Ii][Dd]) (.*)$",
 	"^([Kk]ickme)$",
 	"^([Kk]ick) (.*)$",
-	"^([Nn]ewlink)$",
-	"^([Ss]etlink)$",
+	"^([Nn]wlink)$",
+	"^([Ss]tlink)$",
 	"^([Ll]ink)$",
 	"^([Rr]es) (.*)$",
-	"^([Ss]etadmin) (.*)$",
-	"^([Ss]etadmin)",
-	"^([Dd]emoteadmin) (.*)$",
-	"^([Dd]emoteadmin)",
-	"^([Ss]etowner) (.*)$",
-	"^([Ss]etowner)$",
-	"^([Pp]romote) (.*)$",
-	"^([Pp]romote)",
-	"^([Dd]emote) (.*)$",
-	"^([Dd]emote)",
-	"^([Ss]etname) (.*)$",
-	"^([Ss]etabout) (.*)$",
-	"^([Ss]etrules) (.*)$",
-	"^([Ss]etphoto)$",
-	"^([Ss]etusername) (.*)$",
+	"^([Ss]tadmin) (.*)$",
+	"^([Ss]tadmin)",
+	"^([Dd]moteadmin) (.*)$",
+	"^([Dd]moteadmin)",
+	"^([Ss]toner) (.*)$",
+	"^([Ss]toner)$",
+	"^([Ss]tmod) (.*)$",
+	"^([Ss]tmod)",
+	"^([Dd]elmod) (.*)$",
+	"^([Dd]elmod)",
+	"^([Ss]tnam) (.*)$",
+	"^([Ss]tabout) (.*)$",
+	"^([Ss]trules) (.*)$",
+	"^([Ss]tphoto)$",
+	"^([Ss]tusername) (.*)$",
 	"^([Dd]el)$",
 	"^([Ll]ock) (.*)$",
 	"^([Uu]nlock) (.*)$",
@@ -2019,11 +2019,11 @@ return {
 	"^([Mm]uteuser)$",
 	"^([Mm]uteuser) (.*)$",
 	"^([Pp]ublic) (.*)$",
-	"^([Ss]ettings)$",
+	"^([Ss]ting)$",
 	"^([Rr]ules)$",
-	"^([Ss]etflood) (%d+)$",
+	"^([Ss]tflod) (%d+)$",
 	"^([Cc]lean) (.*)$",
-	"^([Hh]elp)$",
+	"^([Hh]lp)$",
 	"^([Mm]uteslist)$",
 	"^([Mm]utelist)$",
     "[#!/](mp) (.*)",
